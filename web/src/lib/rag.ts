@@ -1,4 +1,3 @@
-import { invariant } from "@langchain/core/utils/invariant";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { OllamaEmbeddings } from "@langchain/community/embeddings/ollama";
@@ -24,7 +23,9 @@ export async function getVectorStore() {
 
 export async function upsertDocuments(input: { namespace?: string; texts: string[] }) {
   const texts = (input?.texts ?? []).map(t => (t ?? "").toString()).filter(t => t.trim().length > 0);
-  invariant(texts.length > 0, "texts must be a non-empty array of strings");
+  if (texts.length === 0) {
+    throw new Error("texts must be a non-empty array of strings");
+  }
 
   const splitter = new RecursiveCharacterTextSplitter({ chunkSize: 800, chunkOverlap: 120 });
   const allChunks: string[] = [];

@@ -30,8 +30,14 @@ export default function Home() {
     }
   }
 
-  function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+  function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    // Send on Enter; allow Shift+Enter for newline
     if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+    // Send on Ctrl/Cmd+Enter as well
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
       e.preventDefault();
       sendMessage();
     }
@@ -39,7 +45,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <header className="px-4 py-3 border-b text-center sticky top-0 bg-background z-10">
+      <header className="px-4 py-3 border-b text-center sticky top-0 bg-background z-10" style={{ paddingTop: "env(safe-area-inset-top)" }}>
         <h1 className="text-base font-semibold">PH Law Assistant</h1>
         <p className="text-xs text-black/60 dark:text-white/60 mt-1">
           Educational info only, not legal advice.
@@ -72,18 +78,21 @@ export default function Home() {
           )}
         </div>
 
-        <div className="flex gap-2 items-center sticky bottom-0 bg-background py-2">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={onKeyDown}
-            placeholder="Type your question"
-            className="flex-1 border rounded-xl px-3 py-3 text-sm bg-transparent"
-          />
+        <div className="flex gap-2 items-end sticky bottom-0 bg-background pt-2" style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 8px)" }}>
+          <div className="flex-1 border rounded-2xl px-3 py-2 bg-transparent">
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={onKeyDown}
+              placeholder="Type your question"
+              rows={2}
+              className="w-full resize-none text-sm outline-none bg-transparent placeholder:text-black/40 dark:placeholder:text-white/40"
+            />
+          </div>
           <button
             onClick={sendMessage}
             disabled={isLoading || !input.trim()}
-            className="rounded-xl px-4 py-3 text-sm font-medium bg-foreground text-background disabled:opacity-50"
+            className="rounded-2xl px-4 py-3 text-sm font-medium bg-foreground text-background disabled:opacity-50 active:opacity-90"
           >
             Send
           </button>
