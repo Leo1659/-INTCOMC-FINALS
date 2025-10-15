@@ -10,7 +10,12 @@
   },
   "dependencies": {
     "next": "15.5.5",
-    "openai": "^6.3.0",
+    "ollama": "^0.5.10",
+    "@langchain/community": "^0.3.22",
+    "@langchain/core": "^0.3.34",
+    "@langchain/ollama": "^0.1.2",
+    "@langchain/textsplitters": "^0.0.3",
+    "langchain": "^0.3.7",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

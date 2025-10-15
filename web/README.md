@@ -7,8 +7,14 @@ Environment
 Create `.env.local` in `web/` with:
 
 ```
-OPENAI_API_KEY=sk-...
+OLLAMA_HOST=http://localhost:11434
+OLLAMA_MODEL=llama3.2
 ```
+
+**Prerequisites:**
+1. Install Ollama from https://ollama.ai/
+2. Pull a model: `ollama pull llama3.2` (or your preferred model)
+3. Start Ollama service: `ollama serve`
 
 Run the development server:
 

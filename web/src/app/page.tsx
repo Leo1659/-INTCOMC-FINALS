@@ -22,7 +22,8 @@ export default function Home() {
         body: JSON.stringify({ messages: nextMessages }),
       });
       const data = await res.json();
-      const assistantText = data?.content ?? "Sorry, something went wrong.";
+      console.log("API Response:", data);
+      const assistantText = data?.content ?? data?.error ?? "Sorry, something went wrong.";
       setMessages((prev) => [...prev, { role: "assistant", content: assistantText }]);
     } finally {
       setIsLoading(false);
