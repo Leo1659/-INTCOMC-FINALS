@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Ollama } from "ollama";
-import { retrieveRelevant } from "@/src/lib/rag";
+import { retrieveRelevant } from "@/lib/rag";
 
 const systemPrompt = `You are an AI legal information assistant focused on Philippine law.
 Goals:

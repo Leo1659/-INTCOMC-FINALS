@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { upsertDocuments } from "@/src/lib/rag";
+import { upsertDocuments } from "@/lib/rag";
 
 export async function POST(req: Request) {
   try {
